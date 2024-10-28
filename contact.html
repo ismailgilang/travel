@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css" />
+    <style>
+         .max-height-0 {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .max-height-full {
+            max-height: 300px;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .aktiv{
+            text-decoration: underline;
+        }
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-blue-800 shadow-lg sticky top-0 z-20">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white">TravelPro</a>
+
+            <!-- Hamburger Icon for Mobile -->
+            <div class="md:hidden">
+                <button id="hamburger-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6 transition-transform transform" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation Links for Desktop -->
+            <nav id="nav-menu" class="hidden md:flex md:space-x-4">
+                <a href="index.html" class="text-gray-200 hover:text-blue-300 hover:underline  transition duration-300">Home</a>
+                <a href="order.html" class="text-gray-200 hover:text-blue-300 hover:underline transition duration-300">Booking</a>
+                <a href="contact.html" class="text-gray-200 hover:text-blue-300 hover:underline transition duration-300 aktiv">Contact</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Menu Links with Smooth Slide-down Animation -->
+        <div id="mobile-menu" class="md:hidden max-height-0 bg-blue-700 text-white text-center">
+            <a href="index.html" class="block px-4 py-2 hover:bg-blue-600 hover:underline transition duration-300">Home</a>
+            <a href="order.html" class="block px-4 py-2 hover:bg-blue-600 hover:underline transition duration-300">Booking</a>
+            <a href="contact.html" class="block px-4 py-2 hover:bg-blue-600 hover:underline transition duration-300 aktiv">Contact</a>
+        </div>
+    </header>
+    <section class="text-center py-10 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-start">
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl text-black font-bold text-left  mb-8" data-aos="fade-up">Hubungi Kami</h2> 
+                    <form action="#" method="POST" class="space-y-4" data-aos="fade-up">
+                        <!-- Input Nama -->
+                        <div>
+                            <label for="name" class="block text-left text-lg text-black mb-2">Nama</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Nama Anda" required>
+                        </div>
+                
+                        <!-- Input Email -->
+                        <div>
+                            <label for="email" class="block text-left text-lg text-black mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Email Anda" required>
+                        </div>
+                
+                        <!-- Textarea Pesan -->
+                        <div>
+                            <label for="message" class="block text-left text-lg text-black mb-2">Pesan</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-green-600" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                        </div>
+                
+                        <!-- Tombol Kirim -->
+                        <div class="mt-6 flex justify-start">
+                            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-800">Kirim Pesan</button>
+                        </div>
+                    </form> 
+                </div>
+                <div style="width: 5rem;">
+                </div>
+                <div class="md:w-1/2">
+                    <img src="images/bus.jpg" alt="">
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <section class="text-center py-10 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-start">
+                <div class="md:w-1/2">
+                    <iframe class="w-full h-96 rounded-md" src="https://www.google.com/maps/embed?..."></iframe>
+                </div>
+                <div style="width: 5rem;">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl text-black font-bold text-left  mb-8" data-aos="fade-up">Lokasi Kami</h2>
+                    <p class="text-left"><b>Alamat</b><br>Jl Raya Sukamenak No 128 Nargahayu Kab </p>
+                    <br>
+                    <p class="text-left"><b>Jam Kerja</b><br>Setiap Hari 24 Jam</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <footer id="contact" class="bg-blue-900 text-white py-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div data-aos="fade-up">
+                    <img src="images/qr.png" alt="" width="300vh" style="display: flex; margin: auto;">
+                </div>
+                <div data-aos="fade-up" class="space-y-4">
+                    <h4 class="text-xl font-bold mb-4">Payment</h4>
+                    <!-- Item Bank BCA -->
+                    <div class="bg-blue-50 p-4 rounded-lg shadow-md flex items-center space-x-4">
+                        <img src="images/bca.png" alt="Bank BCA Logo" class="w-12 object-contain"> <!-- Logo lebih kecil -->
+                        <div class="text-blue-800" style="display: flex;flex-direction: column; margin: auto;">
+                            <p class="text-sm">No. Rek: <span class="font-semibold">1234 5678 9012</span></p>
+                            <p class="text-sm">a/n: <span class="font-semibold">PT. TravelPro</span></p>
+                        </div>
+                    </div>
+                
+                    <!-- Item Bank Mandiri -->
+                    <div class="bg-green-50 p-4 rounded-lg shadow-md flex items-center space-x-4">
+                        <img src="images/mandiri.png" alt="Bank Mandiri Logo" class="w-12 object-contain"> <!-- Logo lebih kecil -->
+                        <div class="text-green-800" style="display: flex;flex-direction: column; margin: auto;">
+                            <p class="text-sm">No. Rek: <span class="font-semibold">2345 6789 0123</span></p>
+                            <p class="text-sm">a/n: <span class="font-semibold">PT. TravelPro</span></p>
+                        </div>
+                    </div>
+                
+                    <!-- Item Bank BNI -->
+                    <div class="bg-red-50 p-4 rounded-lg shadow-md flex items-center space-x-4">
+                        <img src="images/bni.png" alt="Bank BNI Logo" class="w-12 object-contain"> <!-- Logo lebih kecil -->
+                        <div class="text-red-800" style="display: flex;flex-direction: column; margin: auto;">
+                            <p class="text-sm">No. Rek: <span class="font-semibold">3456 7890 1234</span></p>
+                            <p class="text-sm">a/n: <span class="font-semibold">PT. TravelPro</span></p>
+                        </div>
+                    </div>
+                
+                    <!-- Bayar di Tempat -->
+                    <div class="bg-yellow-50 p-4 rounded-lg shadow-md flex items-center space-x-4">
+                        <i class="fas fa-money-check-alt text-green-600 text-xl"></i> <!-- Ikon bayar di tempat -->
+                        <div class="text-green-600" style="display: flex;flex-direction: column; margin: auto;">
+                            <p class="text-sm font-semibold">Bayar di Tempat</p>
+                            <p class="text-xs">Pembayaran saat menerima layanan.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-up">
+                    <h4 class="text-xl font-bold mb-4">Our Location</h4>
+                    <iframe class="w-full h-40 rounded-md" src="https://www.google.com/maps/embed?..."></iframe>
+                    <br>
+                    <h4 class="text-xl font-bold mb-4"data-aos="fade-up">Follow Us</h4>
+                    <div class="flex justify-center space-x-4" data-aos="fade-up">
+                        <a href="#" class="text-2xl hover:text-blue-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-blue-300"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <br>
+                    <h4 class="text-xl font-bold mb-4"data-aos="fade-up">Address</h4>
+                    <div class="flex justify-center space-x-4" data-aos="fade-up">
+                        <p>Office Jl Raya Sukamenak No 128 Bandung</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+    <script>
+        AOS.init(); // Initialize AOS
+    </script>
+    <script>
+        const hamburgerButton = document.getElementById("hamburger-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        hamburgerButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("max-height-0");
+            mobileMenu.classList.toggle("max-height-full");
+        });
+
+    </script>
+</body>
+
+</html>
