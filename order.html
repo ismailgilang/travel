@@ -113,7 +113,7 @@
                     <button type="button" class="next-button bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-500 transition duration-300">Berikutnya</button>
                 </div>
             </div>
-
+        
             <!-- Slide 2: Instansi (Optional) -->
             <div class="slide" id="slide-2">
                 <div class="bg-white shadow-md rounded-lg p-6">
@@ -126,7 +126,7 @@
                     <button type="button" class="next-button bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-500 transition duration-300">Berikutnya</button>
                 </div>
             </div>
-
+        
             <!-- Slide 3: Pembayaran -->
             <div class="slide" id="slide-3">
                 <div class="bg-white shadow-md rounded-lg p-6">
@@ -147,10 +147,14 @@
                     <button type="button" class="next-button bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-500 transition duration-300">Berikutnya</button>
                 </div>
             </div>
-
+        
             <!-- Slide 4: Konfirmasi Pembayaran -->
             <div class="slide" id="slide-4">
                 <div class="bg-white shadow-md rounded-lg p-6">
+                    <h2 class="text-xl font-bold mb-4">Upload Bukti Pembayaran</h2>
+                    <div class="mb-6">
+                        <input type="file" id="bukti" name="bukti" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md" placeholder="Masukkan jumlah pembayaran">
+                    </div>
                     <h2 class="text-xl font-bold mb-4">Konfirmasi Pembayaran</h2>
                     <p class="mb-6">Silakan periksa detail pembayaran Anda sebelum mengonfirmasi:</p>
                     <div class="mb-6">
@@ -161,7 +165,7 @@
                     <button type="button" class="confirm-button bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-500 transition duration-300">Konfirmasi Pembayaran</button>
                 </div>
             </div>
-
+        
             <!-- Slide 5: Bukti Pembayaran -->
             <div class="slide" id="slide-5">
                 <div class="bg-white shadow-md rounded-lg p-6 text-center">
@@ -255,93 +259,117 @@
 
     </script>
     <script>
-        let currentSlide = 0;
-        const totalSlides = $('.slide').length;
-
-        function showSlide(index) {
-            $('.slide').removeClass('active');
-            $('.slide').eq(index).addClass('active');
-            $('#progress-bar').css('width', ((index + 1) / totalSlides * 100) + '%');
-        }
-
-        $('.next-button').on('click', function() {
-            let inputs = $('.slide.active input, .slide.active select');
-            let valid = true;
-
-            inputs.each(function() {
-                if (!this.checkValidity()) {
-                    valid = false;
-                }
-            });
-
-            if (valid) {
-                if (currentSlide === 0) {
-                    $('#confirmation-details').html(`
-                        ID Pesanan: ${orderID} <br>
-                        Nama: ${$('#name').val()} <br>
-                        Email: ${$('#email').val()} <br>
-                        Nomor Telepon: ${$('#phone').val()} <br>
-                        Jumlah: Rp ${$('#amount').val()} <br>
-                        Metode Pembayaran: ${$('#payment_method').val()}
-                    `);
-                }
-                currentSlide++;
-                showSlide(currentSlide);
-            } else {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Lengkapi Data',
-                    text: 'Silakan lengkapi semua data yang diperlukan!',
-                    position: 'top-end', // Set position to top-right
-                    showConfirmButton: true,
-                    timer: 3000 // Optional: auto-close after 3 seconds
-                });
+        // Generate a unique random order ID
+        const orderID = 'ORD-' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+    
+        $(document).ready(function() {
+            let currentSlide = 0;
+            const totalSlides = $('.slide').length;
+    
+            function showSlide(index) {
+                $('.slide').removeClass('active');
+                $('.slide').eq(index).addClass('active');
+                $('#progress-bar').css('width', ((index + 1) / totalSlides * 100) + '%');
             }
-        });
-
-        $('.prev-button').on('click', function() {
-            currentSlide--;
-            showSlide(currentSlide);
-        });
-
-        $('.confirm-button').on('click', function() {
-            Swal.fire({
-                title: 'Konfirmasi Pembayaran',
-                text: "Apakah Anda yakin ingin mengonfirmasi pembayaran?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Ya, Konfirmasi',
-                cancelButtonText: 'Batal',
-                position: 'top-end' // Set position to top-right
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Pembayaran Berhasil!',
-                        text: 'Terima kasih telah melakukan pembayaran.',
-                        icon: 'success',
-                        position: 'top-end', // Set position to top-right
-                        showConfirmButton: true,
-                        timer: 3000 // Optional: auto-close after 3 seconds
-                    }).then(() => {
+    
+            $('.next-button').on('click', function() {
+                let inputs = $('.slide.active input, .slide.active select');
+                let valid = true;
+    
+                inputs.each(function() {
+                    if (!this.checkValidity()) {
+                        valid = false;
+                        return false; // stop further checks
+                    }
+                });
+    
+                if (valid) {
+                    if (currentSlide === 2) {
+                        $('#confirmation-details').html(`
+                            ID Pesanan: ${orderID} <br>
+                            Nama: ${$('#name').val()} <br>
+                            Email: ${$('#email').val()} <br>
+                            Nomor Telepon: ${$('#phone').val()} <br>
+                            Jumlah: Rp ${$('#amount').val()} <br>
+                            Metode Pembayaran: ${$('#payment_method').val()}
+                        `);
+                    }
+                    if (currentSlide < totalSlides - 1) {
                         currentSlide++;
                         showSlide(currentSlide);
+                    }
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Lengkapi Data',
+                        text: 'Silakan lengkapi semua data yang diperlukan!',
+                        position: 'top-end',
+                        showConfirmButton: true,
+                        timer: 3000
                     });
                 }
             });
-        });
-
-        $('.download-button').on('click', function() {
-            // Here, you can add your logic to download the payment proof
-            Swal.fire({
-                title: 'Download Bukti Pembayaran',
-                text: 'Bukti pembayaran akan diunduh.',
-                icon: 'success',
-                position: 'top-end', // Set position to top-right
-                showConfirmButton: true,
-                timer: 3000 // Optional: auto-close after 3 seconds
+    
+            $('.prev-button').on('click', function() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
             });
+    
+            $('.confirm-button').on('click', function() {
+                Swal.fire({
+                    title: 'Konfirmasi Pembayaran',
+                    text: "Apakah Anda yakin ingin mengonfirmasi pembayaran?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Konfirmasi',
+                    cancelButtonText: 'Batal',
+                    position: 'top-end'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Pembayaran Berhasil!',
+                            text: 'Terima kasih telah melakukan pembayaran.',
+                            icon: 'success',
+                            position: 'top-end',
+                            showConfirmButton: true,
+                            timer: 3000
+                        });
+                        if (currentSlide < totalSlides - 1) {
+                            currentSlide++;
+                            showSlide(currentSlide);
+                        }
+                    }
+                });
+            });
+    
+            showSlide(currentSlide);
         });
     </script>
+    <script>
+        document.querySelector('.download-button').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf; // mengambil jsPDF dari objek window
+            const doc = new jsPDF();
+
+            // Isi detail pembayaran yang ingin dimasukkan ke dalam PDF
+            const orderDetails = `
+                ID Pesanan: ${orderID}
+                Nama: ${$('#name').val()}
+                Email: ${$('#email').val()}
+                Nomor Telepon: ${$('#phone').val()}
+                Jumlah: Rp ${$('#amount').val()}
+                Metode Pembayaran: ${$('#payment_method').val()}
+            `;
+
+            doc.text("Bukti Pembayaran", 10, 10); // Judul di PDF
+            doc.text(orderDetails, 10, 20); // Detail di PDF
+            
+            // Menyimpan file PDF
+            doc.save("Bukti_Pembayaran.pdf");
+        });
+    </script>
+    
 </body>
 
 </html>
